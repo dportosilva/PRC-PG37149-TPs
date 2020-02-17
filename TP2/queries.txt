@@ -1,0 +1,34 @@
+1. nome dos compositores - ordem alfabética
+
+PREFIX : <http://www.semanticweb.org/diegoporto/ontologies/2020/1/arquivo-musica-digital#>
+select ?compositor where { 
+	?obra :compositor ?compositor.
+} order by asc(UCASE(str(?compositor)))
+
+
+2. título das obras do tipo marcha de desfile
+
+PREFIX : <http://www.semanticweb.org/diegoporto/ontologies/2020/1/arquivo-musica-digital#>
+select ?titulo where { 
+	?obra :tipo "Marcha de Desfile".
+    ?obra :titulo ?titulo
+}
+
+
+3. para cada obra quantas partituras estão catalogadas
+
+PREFIX : <http://www.semanticweb.org/diegoporto/ontologies/2020/1/arquivo-musica-digital#>
+select ?obra ?partitura where { 
+    ?obra :éTocadaPor ?instrumento.
+    ?instrumento :éDefinidoPor ?partitura .
+} 
+
+
+4. quais os tipos das obras com partitura para bombo
+
+PREFIX : <http://www.semanticweb.org/diegoporto/ontologies/2020/1/arquivo-musica-digital#>
+select distinct ?tipo where { 
+    ?obra :éTocadaPor ?instrumento.
+    ?instrumento :designacao "Bombo" .
+    ?obra :tipo ?tipo
+}
